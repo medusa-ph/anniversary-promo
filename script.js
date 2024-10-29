@@ -17,39 +17,27 @@ const maxPurchases = 3;
 
 async function submitCode() {
   const codeInput = document.getElementById('code-input').value.trim().toUpperCase();
-  console.log(`User entered code: ${codeInput}`); // Log user input
+  console.log(`User entered code: ${codeInput}`);
 
   try {
-    // Query Firestore to check if the code exists and is valid
     const codeRef = db.collection('purchaseCodes').doc(codeInput);
     const doc = await codeRef.get();
-    console.log(`Document exists: ${doc.exists}`); // Log whether the document exists
 
-    if (doc.exists) {
-      console.log(`Document data: ${JSON.stringify(doc.data())}`); // Log document data
+    if (doc.exists && !doc.data().used) {
+      console.log('Code is valid and not used. Updating...');
+      await codeRef.update({ used: true });
 
-      if (doc.data().used === false) {
-        console.log('Code is valid and not used. Updating...'); // Log success
-
-        // Mark the code as used
-        await codeRef.update({ used: true });
-
-        purchaseCount++;
-        updateProgress();
-      } else {
-        console.log('Code is already used.'); // Log used code
-        alert('This code has already been used.');
-      }
+      purchaseCount++;
+      updateProgress();
     } else {
-      console.log('Code not found.'); // Log invalid code
-      alert('Invalid code. Please try again.');
+      alert('Invalid or already used code.');
     }
   } catch (error) {
-    console.error('Error validating code:', error); // Log any errors
+    console.error('Error validating code:', error);
     alert('Something went wrong. Please try again later.');
   }
 
-  document.getElementById('code-input').value = ''; // Clear input field
+  document.getElementById('code-input').value = '';
 }
 
 
