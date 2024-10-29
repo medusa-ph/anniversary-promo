@@ -10,6 +10,7 @@ Policy
 **How to Redeem the Discount:**
 	-Users must enter a valid purchase code to complete 3 purchases and unlock the 50% discount.
 	-The discount will be applied once the third purchase is successfully completed with a valid code.
+	-After each purchase (in-store or online), users will receive a unique code.
 
 **Progress Storage:**
 	-Progress will be stored locally on your device and browser.
