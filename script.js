@@ -1,50 +1,37 @@
 let purchaseCount = 0;
 const maxPurchases = 3;
-let userId = ""; // To store the user's email-based ID
+let usedCodes = []; // Track used codes to prevent reuse
 
-// Function to generate a unique code based on the user's email
-function generateCode() {
-    const emailInput = document.getElementById("email-input").value.trim();
-    if (!emailInput) {
-        alert("Please enter a valid email.");
-        return;
-    }
-
-    userId = emailInput; // Save the user's email as their ID
-    const code = btoa(emailInput + "-secret"); // Basic encoding for simplicity
-    alert("Your unique code: " + code);
-}
+// Example: Pre-generated valid codes (in real life, these will be generated server-side)
+const validCodes = ['PURCHASE123', 'PURCHASE456', 'PURCHASE789'];
 
 // Function to handle code submission
 function submitCode() {
-    const codeInput = document.getElementById("code-input").value.trim();
-    const expectedCode = btoa(userId + "-secret"); // Generate the expected code
+    const codeInput = document.getElementById('code-input').value.trim();
 
-    if (codeInput === expectedCode) {
-        if (purchaseCount < maxPurchases) {
-            purchaseCount++;
-            updateProgress();
-        } else {
-            alert("You have already completed 3 purchases!");
-        }
+    if (validCodes.includes(codeInput) && !usedCodes.includes(codeInput)) {
+        // Valid and unused code submitted
+        purchaseCount++;
+        usedCodes.push(codeInput); // Mark code as used
+        updateProgress();
     } else {
-        alert("Invalid code. Please try again.");
+        alert("Invalid or already used code. Please try again.");
     }
 
-    document.getElementById("code-input").value = ''; // Clear input field
+    document.getElementById('code-input').value = ''; // Clear input field
 }
 
-// Function to update progress bar and text
+// Function to update the progress bar and text
 function updateProgress() {
-    const progressBar = document.getElementById("progress-bar");
-    const progressText = document.getElementById("progress-text");
-    const discountMessage = document.getElementById("discount-message");
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const discountMessage = document.getElementById('discount-message');
 
     const progressPercent = (purchaseCount / maxPurchases) * 100;
     progressBar.style.width = progressPercent + '%';
     progressText.innerText = `Progress: ${purchaseCount} / ${maxPurchases} purchases`;
 
     if (purchaseCount >= maxPurchases) {
-        discountMessage.classList.remove("hidden");
+        discountMessage.classList.remove('hidden');
     }
 }
