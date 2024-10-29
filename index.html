@@ -25,11 +25,14 @@
 
     <script src="script.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"></script>
+<!-- Firebase App (Base SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Firebase configuration (replace with your own config)
+  // Your Firebase configuration
   const firebaseConfig = {
     apiKey: "your-api-key",
     authDomain: "your-app.firebaseapp.com",
@@ -40,9 +43,12 @@
   };
 
   // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firestore
   const db = firebase.firestore();
 </script>
+
 
     
 </body>
