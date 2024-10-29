@@ -1,4 +1,4 @@
-// Firebase configuration (replace with your actual Firebase config)
+// Initialize Firebase (replace with your actual Firebase configuration)
 const firebaseConfig = {
   apiKey: "your-api-key",
   authDomain: "your-app.firebaseapp.com",
@@ -8,7 +8,6 @@ const firebaseConfig = {
   appId: "your-app-id"
 };
 
-// Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -19,12 +18,12 @@ async function submitCode() {
   const codeInput = document.getElementById('code-input').value.trim().toUpperCase();
 
   try {
-    // Query the document with the submitted code as its ID
+    // Query Firestore to check if the code exists and is valid
     const codeRef = db.collection('purchaseCodes').doc(codeInput);
     const doc = await codeRef.get();
 
     if (doc.exists && doc.data().used === false) {
-      // If the code is valid and not used, mark it as used
+      // Mark the code as used
       await codeRef.update({ used: true });
 
       purchaseCount++;
