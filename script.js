@@ -25,17 +25,24 @@ async function submitCode() {
     const doc = await codeRef.get();
     console.log(`Document exists: ${doc.exists}`); // Log whether the document exists
 
-    if (doc.exists && doc.data().used === false) {
-      console.log('Code is valid and not used. Updating...'); // Log success
+    if (doc.exists) {
+      console.log(`Document data: ${JSON.stringify(doc.data())}`); // Log document data
 
-      // Mark the code as used
-      await codeRef.update({ used: true });
+      if (doc.data().used === false) {
+        console.log('Code is valid and not used. Updating...'); // Log success
 
-      purchaseCount++;
-      updateProgress();
+        // Mark the code as used
+        await codeRef.update({ used: true });
+
+        purchaseCount++;
+        updateProgress();
+      } else {
+        console.log('Code is already used.'); // Log used code
+        alert('This code has already been used.');
+      }
     } else {
-      console.log('Code is invalid or already used.'); // Log invalid case
-      alert('Invalid or already used code. Please try again.');
+      console.log('Code not found.'); // Log invalid code
+      alert('Invalid code. Please try again.');
     }
   } catch (error) {
     console.error('Error validating code:', error); // Log any errors
