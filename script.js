@@ -3,7 +3,7 @@ let purchaseCount = 0;
 let userId = 'user123'; // Simulate unique user ID (can come from login system)
 
 // Example valid purchase codes (in real scenarios, these would come from your backend)
-const validCodes = ['CODE123', 'CODE456', 'CODE789'];
+const validCodes = ['MEDUSA1030-001', 'MEDUSA1030-002', 'MEDUSA1030-003', 'MEDUSA1030-004', 'MEDUSA1030-005', 'MEDUSA1030-006', 'MEDUSA1030-007', 'MEDUSA1030-008', 'MEDUSA1030-009', 'MEDUSA1030-0010'];
 
 // Load user progress from localStorage
 window.onload = function () {
