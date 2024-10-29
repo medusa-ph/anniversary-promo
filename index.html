@@ -1,44 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3rd Anniversary Discount Tracker</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medusa PH Clouds - 3 Years Strong</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🎉 Celebrate Our 3rd Anniversary! 🎉</h1>
-    <p>Enter the <b>unique code</b> you receive after each purchase to track your progress. Complete 3 purchases to unlock a <b>50% discount</b>!</p>
+    <div class="container">
+        <h1>Medusa PH Clouds</h1>
+        <p>Celebrate our 3rd anniversary with us! </p>
+        <p>Enter your unique purchase code to unlock progress. Complete 3 purchases to get 50% off on all products!</p>
 
-    <input type="text" id="code-input" placeholder="Enter your purchase code">
-    <button onclick="submitCode()">Submit Code</button>
+        <input type="text" id="code-input" placeholder="Enter your purchase code">
+        <button onclick="submitCode()" id="submit-button">Submit Code</button>
 
-    <div class="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="progress-text">Progress: 0 / 3 purchases</p>
+        <p><a href="Policy.txt" target="_blank">Policy</a></p>
+
+        <p id="discount-message" class="hidden">Congratulations, you unlocked a 50% discount! 🎉</p>
     </div>
-    <p id="progress-text">Progress: 0 / 3 purchases</p>
-    <p id="discount-message" class="hidden">🎉 Congratulations! You unlocked a 50% discount! 🎉</p>
-  </div>
 
-  <!-- Firebase Scripts -->
-<script>
-  const firebaseConfig = {
-    apiKey: "your-api-key",
-    authDomain: "your-app.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-app.appspot.com",
-    messagingSenderId: "your-messaging-sender-id",
-    appId: "your-app-id"
-  };
-
-  // Initialize Firebase only once
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-
-
-  <!-- Your custom script -->
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
