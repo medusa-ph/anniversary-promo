@@ -11,6 +11,11 @@ Policy
 	-Users must enter a valid purchase code to complete 3 purchases and unlock the 50% discount.
 	-The discount will be applied once the third purchase is successfully completed with a valid code.
 
+**Progress Storage:**
+	-Progress will be stored locally on your device and browser.
+	-If the progress is reset or removed (e.g., clearing browser cache or using a different device), we are not responsible, and we cannot restore the progress unless there is sufficient evidence to retrieve it.
+	-To avoid issues, we recommend using the same device and browser throughout the promotion.
+
 **System Downtime and Manual Assistance:**
 	-In the event of system downtime or technical issues, we reserve the right to switch to manual processing to ensure participants are still assisted.
 	Participants can contact support if any issues arise with their progress or code validation.
