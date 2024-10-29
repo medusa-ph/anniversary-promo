@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medusa PH Clouds - 3 Years Strong</title>
+    <title>3rd Anniversary Discount Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Medusa PH Clouds</h1>
-        <p>Celebrate our 3rd anniversary with us! </p>
-        <p>Enter your unique purchase code to unlock progress. Complete 3 purchases to get 50% off on all products!</p>
+        <h1>🎉 Celebrate Our 3rd Anniversary! 🎉</h1>
+        <p>Enter your **email** to generate your purchase code. Complete 3 purchases to unlock a **50% discount**!</p>
+
+        <input type="email" id="email-input" placeholder="Enter your email" required>
+        <button onclick="generateCode()">Generate Code</button>
 
         <input type="text" id="code-input" placeholder="Enter your purchase code">
-        <button onclick="submitCode()" id="submit-button">Submit Code</button>
+        <button onclick="submitCode()">Submit Code</button>
 
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
         <p id="progress-text">Progress: 0 / 3 purchases</p>
-        <p><a href="Policy.txt" target="_blank">Policy</a></p>
 
-        <p id="discount-message" class="hidden">Congratulations, you unlocked a 50% discount! 🎉</p>
+        <p id="discount-message" class="hidden">🎉 Congratulations! You unlocked a 50% discount! 🎉</p>
     </div>
 
     <script src="script.js"></script>
