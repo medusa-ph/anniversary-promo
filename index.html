@@ -1,55 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3rd Anniversary Discount Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3rd Anniversary Discount Tracker</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 Celebrate Our 3rd Anniversary! 🎉</h1>
-        <p>Enter the **unique code** you receive after each purchase to track your progress. Complete 3 purchases to unlock a **50% discount**!</p>
+  <div class="container">
+    <h1>🎉 Celebrate Our 3rd Anniversary! 🎉</h1>
+    <p>Enter the <b>unique code</b> you receive after each purchase to track your progress. Complete 3 purchases to unlock a <b>50% discount</b>!</p>
 
-<input type="text" id="code-input" placeholder="Enter your purchase code">
-<button onclick="submitCode()">Submit Code</button>
+    <input type="text" id="code-input" placeholder="Enter your purchase code">
+    <button onclick="submitCode()">Submit Code</button>
 
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-
-        <p id="progress-text">Progress: 0 / 3 purchases</p>
-
-        <p id="discount-message" class="hidden">🎉 Congratulations! You unlocked a 50% discount! 🎉</p>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
     </div>
+    <p id="progress-text">Progress: 0 / 3 purchases</p>
+    <p id="discount-message" class="hidden">🎉 Congratulations! You unlocked a 50% discount! 🎉</p>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
 
-<!-- Firebase App (Base SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+  <script>
+    // Firebase configuration and initialization
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-app.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-app.appspot.com",
+      messagingSenderId: "your-messaging-sender-id",
+      appId: "your-app-id"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 
-<!-- Firebase Firestore -->
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
-
-<script>
-  // Your Firebase configuration
-  const firebaseConfig = {
-    apiKey: "your-api-key",
-    authDomain: "your-app.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-app.appspot.com",
-    messagingSenderId: "your-messaging-sender-id",
-    appId: "your-app-id"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // Initialize Firestore
-  const db = firebase.firestore();
-</script>
-
-
-    
+  <!-- Your custom script -->
+  <script src="script.js"></script>
 </body>
 </html>
