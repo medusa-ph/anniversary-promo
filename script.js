@@ -1,56 +1,52 @@
-// Initialize Firebase (replace with your actual Firebase configuration)
-const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "your-messaging-sender-id",
-  appId: "your-app-id"
+const maxPurchases = 3; // Total purchases required
+let purchaseCount = 0;
+let userId = 'user123'; // Simulate unique user ID (can come from login system)
+
+// Example valid purchase codes (in real scenarios, these would come from your backend)
+const validCodes = ['MEDUSA1030-001', 'MEDUSA1030-002', 'MEDUSA1030-003', 'MEDUSA1030-004', 'MEDUSA1030-005', 'MEDUSA1030-006', 'MEDUSA1030-007', 'MEDUSA1030-008', 'MEDUSA1030-009', 'MEDUSA1030-0010'];
+
+// Load user progress from localStorage
+window.onload = function () {
+    const savedData = JSON.parse(localStorage.getItem(userId)) || { count: 0 };
+    purchaseCount = savedData.count;
+    updateProgress();
 };
 
+// Function to handle code submission
+function submitCode() {
+    const codeInput = document.getElementById('code-input').value.trim();
 
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-let purchaseCount = 0;
-const maxPurchases = 3;
-
-async function submitCode() {
-  const codeInput = document.getElementById('code-input').value.trim().toUpperCase();
-  console.log(`User entered code: ${codeInput}`);
-
-  try {
-    const codeRef = db.collection('purchaseCodes').doc(codeInput);
-    const doc = await codeRef.get();
-
-    if (doc.exists && !doc.data().used) {
-      console.log('Code is valid and not used. Updating...');
-      await codeRef.update({ used: true });
-
-      purchaseCount++;
-      updateProgress();
+    if (validCodes.includes(codeInput)) {
+        if (purchaseCount < maxPurchases) {
+            purchaseCount++;
+            validCodes.splice(validCodes.indexOf(codeInput), 1); // Invalidate code after use
+            saveProgress();
+            updateProgress();
+        }
     } else {
-      alert('Invalid or already used code.');
+        alert('Invalid or already used code. Please try again.');
     }
-  } catch (error) {
-    console.error('Error validating code:', error);
-    alert('Something went wrong. Please try again later.');
-  }
 
-  document.getElementById('code-input').value = '';
+    document.getElementById('code-input').value = ''; // Clear input field
 }
 
+// Save progress to localStorage
+function saveProgress() {
+    localStorage.setItem(userId, JSON.stringify({ count: purchaseCount }));
+}
 
+// Update progress bar and text
 function updateProgress() {
-  const progressBar = document.getElementById('progress-bar');
-  const progressText = document.getElementById('progress-text');
-  const discountMessage = document.getElementById('discount-message');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const discountMessage = document.getElementById('discount-message');
+    const progressPercent = (purchaseCount / maxPurchases) * 100;
 
-  const progressPercent = (purchaseCount / maxPurchases) * 100;
-  progressBar.style.width = progressPercent + '%';
-  progressText.innerText = `Progress: ${purchaseCount} / ${maxPurchases} purchases`;
+    progressBar.style.width = progressPercent + '%';
+    progressText.innerText = `Progress: ${purchaseCount} / ${maxPurchases} purchases`;
 
-  if (purchaseCount >= maxPurchases) {
-    discountMessage.classList.remove('hidden');
-  }
+    if (purchaseCount >= maxPurchases) {
+        discountMessage.classList.remove('hidden');
+        document.getElementById('submit-button').disabled = true;
+    }
 }
