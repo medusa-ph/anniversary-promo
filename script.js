@@ -47,3 +47,23 @@ function updateProgress() {
         discountMessage.classList.remove('hidden');
     }
 }
+
+async function submitCode() {
+  const codeInput = document.getElementById('code-input').value.trim().toUpperCase();
+
+  const codeRef = db.collection('purchaseCodes').doc(codeInput);
+  const doc = await codeRef.get();
+
+  if (doc.exists && !doc.data().used) {
+    // Mark the code as used in Firestore
+    await codeRef.update({ used: true });
+
+    purchaseCount++;
+    updateProgress();
+  } else {
+    alert('Invalid or already used code.');
+  }
+
+  document.getElementById('code-input').value = ''; // Clear input field
+}
+
